@@ -31,25 +31,41 @@ namespace Tray
 
             //设置托盘的各个属性
             notifyIcon = new System.Windows.Forms.NotifyIcon();
-            notifyIcon.BalloonTipText = "";
+            notifyIcon.BalloonTipText = "程序开始运行";
             string s = "OfficeScan (Online)\r\nAntivirus \r\nDCS Eng/Ptn:7.0.1028/1268";
             notifyIcon.Text = s;
-            notifyIcon.Icon = new System.Drawing.Icon("favicon.ico");
+            notifyIcon.Icon = new System.Drawing.Icon("favicon2.ico");
             notifyIcon.Visible = true;
-            notifyIcon.ShowBalloonTip(2000);
+            notifyIcon.ShowBalloonTip(1000);
             notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon_MouseClick);
 
             //设置菜单项
+            System.Windows.Forms.MenuItem[] menuitems = 
+            {
+                new System.Windows.Forms.MenuItem("OfficeScan Console"),
+                new System.Windows.Forms.MenuItem("-"),
+                new System.Windows.Forms.MenuItem("Component Versions"),
+                new System.Windows.Forms.MenuItem("Update Now"),
+                new System.Windows.Forms.MenuItem("-"),
+                new System.Windows.Forms.MenuItem("Enable Roaming Mode"),
+                new System.Windows.Forms.MenuItem("-"),
+                new System.Windows.Forms.MenuItem("Scheduled Scan Advanced Settings"),
+                new System.Windows.Forms.MenuItem("-"),
+                new System.Windows.Forms.MenuItem("Plug-in Manager"),
+                new System.Windows.Forms.MenuItem("-"),
+                new System.Windows.Forms.MenuItem("Unload OfficeScan")
+            };
+
             System.Windows.Forms.MenuItem menu1 = new System.Windows.Forms.MenuItem("OfficeScan Console");
             System.Windows.Forms.MenuItem menu2 = new System.Windows.Forms.MenuItem("菜单项2");
-            System.Windows.Forms.MenuItem menu = new System.Windows.Forms.MenuItem("菜单", new System.Windows.Forms.MenuItem[] { menu1, menu2 });
-
-            //退出菜单项
-            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("exit");
-            exit.Click += new EventHandler(exit_Click);
+            //分隔线！！
+            System.Windows.Forms.MenuItem menu3 = new System.Windows.Forms.MenuItem("-");
+            ////退出菜单项
+            //System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("exit");
+            //exit.Click += new EventHandler(exit_Click);
 
             //关联托盘控件
-            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { menu, exit };
+            System.Windows.Forms.MenuItem[] childen = menuitems;
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
 
             //窗体状态改变时候触发
